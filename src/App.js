@@ -1,8 +1,17 @@
-
-
+import Header from "./components/Header";
+import Form from "./components/Form";
 function App() {
   return (
-    <h1>Hola</h1>
+    <>
+      <Header/>
+
+      <div className='container mt-5'>
+        <div className='row'>
+          <Form/>
+        </div>
+      </div>
+      
+    </>
   );
 }
 

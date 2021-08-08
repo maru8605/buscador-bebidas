@@ -19,3 +19,10 @@ h1 {
   text-align: center;
   font-size: 3rem;
 }
+.header {
+  background-color: #7c83fd;
+}
+.button {
+  background-color: #7c83fd;
+  color: #fff;
+}
