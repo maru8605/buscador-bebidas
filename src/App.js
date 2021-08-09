@@ -1,17 +1,28 @@
+import CategoriasProvider from './context/CategoriasContext'
+import RecipesProvider from './context/RecipesContext'
 import Header from "./components/Header";
 import Form from "./components/Form";
-function App() {
-  return (
-    <>
-      <Header/>
+import ListRecipes from './components/ListRecipes';
+import ModalProvider from './context/ModalContext'
 
-      <div className='container mt-5'>
-        <div className='row'>
-          <Form/>
-        </div>
-      </div>
-      
-    </>
+function App() {
+
+
+  return (
+    <CategoriasProvider>
+      <RecipesProvider>
+        <ModalProvider>
+          <Header/>
+
+          <div className='container mt-5'>
+            <div className='row'>
+              <Form/>
+            </div>
+              <ListRecipes/>
+          </div>
+        </ModalProvider>
+      </RecipesProvider>
+    </CategoriasProvider>
   );
 }
 
