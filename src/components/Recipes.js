@@ -19,10 +19,12 @@ function getModalStyle() {
 const useStyles = makeStyles(theme => ({
     paper: {
       position: 'absolute',
-      width: 600,
+      width: 450,
+      maxHeight: 600,
       backgroundColor: theme.palette.background.paper,
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
+      overflow: 'scroll',
     },
 }));
 
@@ -41,7 +43,22 @@ const Recipes = ({recipe}) => {
         setOpen(false)
     }
     
-    const {saveIdRecipe} = useContext(ModalContext)
+    const {info,saveIdRecipe, saveRecipe} = useContext(ModalContext)
+    
+    const mostrarIngredientes = info => {
+        let ingredientes = [];
+        for(let i=1; i<16; i++){
+            if(info[`strIngredient${i}`]) {
+                ingredientes.push(
+                    <li>
+                        {info[`strIngredient${i}`] } {info[`strMeasure${i}`]}
+                    </li>
+                )
+            }
+        }
+        return ingredientes
+    }
+
 
     return (
         <div className='col-md-4 mb-3'>
@@ -56,6 +73,7 @@ const Recipes = ({recipe}) => {
                         className='btn btn-block button'
                         onClick={ () =>{
                             saveIdRecipe(recipe.idDrink)
+
                             handleOpen()
                         }}
                         
@@ -65,10 +83,19 @@ const Recipes = ({recipe}) => {
                      open={open}
                      onClose={ () =>{
                          handleClose()
+                         saveRecipe({})
                          saveIdRecipe(null)
                      }}>
                         <div style={styleModal} className={classes.paper}>
-                            <h1>desde modal</h1>
+                            <h2>{info.strDrink}</h2>
+                            <h3 className='mt-4'>Instrucciones</h3>
+                            <p>{info.strInstructions}</p>
+                            <img className='img-fluid my-4 ' src={info.strDrinkThumb}/>
+
+                            <h3>Ingredientes</h3>
+                            <ul>
+                                {mostrarIngredientes(info)}
+                            </ul>
                         </div>
                     </Modal>
                 </div>
